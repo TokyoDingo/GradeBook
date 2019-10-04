@@ -11,7 +11,7 @@ namespace GradeBook.Tests
         public void BookCalculatesAnAverageGrade()
         {            
             // arrange
-            var book = new Book("");
+            var book = new InMemoryBook("");
             book.AddGrade(89.1);
             book.AddGrade(90.5);
             book.AddGrade(77.3);
@@ -29,7 +29,7 @@ namespace GradeBook.Tests
         [Fact]
         public void GradeMustBeGreaterThanZero()
         {            
-            var book = new Book("");
+            var book = new InMemoryBook("");
             var errorWasThrown = false;
 
             try
@@ -48,7 +48,7 @@ namespace GradeBook.Tests
         [Fact]
         public void GradeMustBeLessThan100()
         {            
-            var book = new Book("");
+            var book = new InMemoryBook("");
             var errorWasThrown = false;
 
             try
@@ -67,7 +67,7 @@ namespace GradeBook.Tests
         [Fact]
         public void LetterGradeIsValid()
         {
-            var book = new Book("");
+            var book = new InMemoryBook("");
             var errorWasThrown = false;
 
             try{
@@ -85,7 +85,7 @@ namespace GradeBook.Tests
         [Fact]
         public void LetterGradeAIs90()
         {
-            var book = new Book("");
+            var book = new InMemoryBook("");
 
             book.AddGrade('A');
             var stat = book.GetStatistics();
@@ -96,7 +96,7 @@ namespace GradeBook.Tests
         [Fact]
         public void LetterGradeBIs80()
         {
-            var book = new Book("");
+            var book = new InMemoryBook("");
 
             book.AddGrade('B');
             var stat = book.GetStatistics();
@@ -107,7 +107,7 @@ namespace GradeBook.Tests
         [Fact]
         public void LetterGradeCIs70()
         {
-            var book = new Book("");
+            var book = new InMemoryBook("");
 
             book.AddGrade('C');
             var stat = book.GetStatistics();
@@ -118,7 +118,7 @@ namespace GradeBook.Tests
         [Fact]
         public void LetterGradeDIs60()
         {
-            var book = new Book("");
+            var book = new InMemoryBook("");
 
             book.AddGrade('D');
             var stat = book.GetStatistics();
@@ -129,7 +129,7 @@ namespace GradeBook.Tests
         [Fact]
         public void LetterGradeFIsZero()
         {
-            var book = new Book("");
+            var book = new InMemoryBook("");
 
             book.AddGrade('F');
             var stat = book.GetStatistics();

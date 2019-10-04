@@ -7,33 +7,57 @@ namespace GradeBook
     {
         static void Main(string[] args)
         {
+            IBook gradeBook = createNewDiskGradeBook();
+
+            EnterGrades(gradeBook);
+
+            OutputStatistics(gradeBook);
+        }
+
+        private static IBook createNewInMemoryGradeBook()
+        {
             Console.WriteLine("Enter the title of your grade book.");
-            var name = Console.ReadLine();
 
-            var gradeBook = new Book( name );
-            var Statistics = new Statistics();
+            var gradeBook = new InMemoryBook(Console.ReadLine());
 
-            gradeBook.GradeAdded += OnGradeAdded;
+            gradeBook.GradeAdded += OnGradeAdded; // Subscribe to grade added event
 
-            while(true)
+            return gradeBook;
+        }
+
+        private static IBook createNewDiskGradeBook()
+        {
+            Console.WriteLine("Enter the title of your grade book.");
+
+            var gradeBook = new DiskBook(Console.ReadLine());
+
+            gradeBook.GradeAdded += OnGradeAdded; // Subscribe to grade added event
+
+            return gradeBook;
+        }
+
+        private static void EnterGrades(IBook gradeBook)
+        {
+            while (true)
             {
                 Console.WriteLine("Enter a grade or 'q' to quit");
                 var input = Console.ReadLine();
 
-                if(input == "q")
+                if (input == "q")
                 {
                     break;
                 }
 
-                try{
+                try
+                {
                     var grade = double.Parse(input);
                     gradeBook.AddGrade(grade);
                 }
-                catch(ArgumentException ex)
+                catch (ArgumentException ex)
                 {
                     Console.WriteLine(ex.Message);
                 }
-                catch(FormatException ex)
+                catch (FormatException ex)
                 {
                     Console.WriteLine(ex.Message);
                 }
@@ -42,15 +66,17 @@ namespace GradeBook
                 //   Console.WriteLine("**");
                 //}
             }
+        }
 
-            Statistics = gradeBook.GetStatistics();
+        private static void OutputStatistics(IBook gradeBook)
+        {
+            var Statistics = gradeBook.GetStatistics();
 
-            Console.WriteLine( $"Statics for {gradeBook.Name}" );
-            Console.WriteLine( $"    Lowest grade is {Statistics.Low}" );
-            Console.WriteLine( $"    Highest grade is {Statistics.High}" );
-            Console.WriteLine( $"    Average grade is {Statistics.Average}" ); 
-            Console.WriteLine( $"    Letter grade is {Statistics.Letter}" ); 
-            
+            Console.WriteLine($"Statics for {gradeBook.Name}");
+            Console.WriteLine($"    Lowest grade is {Statistics.Low}");
+            Console.WriteLine($"    Highest grade is {Statistics.High}");
+            Console.WriteLine($"    Average grade is {Statistics.Average}");
+            Console.WriteLine($"    Average Letter grade is {Statistics.Letter}");
         }
 
         static void OnGradeAdded(object sender, EventArgs e)
