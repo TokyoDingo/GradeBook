@@ -5,6 +5,8 @@ namespace GradeBook.Tests
 {
     public class BookTests
     {
+        // TODO Book name must be not null/non-empty
+
         [Fact]
         public void BookCalculatesAnAverageGrade()
         {            
@@ -69,7 +71,7 @@ namespace GradeBook.Tests
             var errorWasThrown = false;
 
             try{
-                book.AddLetterGrade('E');
+                book.AddGrade('E');
             }
             catch(ArgumentException ex)
             {
@@ -85,7 +87,7 @@ namespace GradeBook.Tests
         {
             var book = new Book("");
 
-            book.AddLetterGrade('A');
+            book.AddGrade('A');
             var stat = book.GetStatistics();
 
             Assert.Equal(90, stat.High);
@@ -96,7 +98,7 @@ namespace GradeBook.Tests
         {
             var book = new Book("");
 
-            book.AddLetterGrade('B');
+            book.AddGrade('B');
             var stat = book.GetStatistics();
 
             Assert.Equal(80, stat.High);
@@ -107,7 +109,7 @@ namespace GradeBook.Tests
         {
             var book = new Book("");
 
-            book.AddLetterGrade('C');
+            book.AddGrade('C');
             var stat = book.GetStatistics();
 
             Assert.Equal(70, stat.High);
@@ -118,7 +120,7 @@ namespace GradeBook.Tests
         {
             var book = new Book("");
 
-            book.AddLetterGrade('D');
+            book.AddGrade('D');
             var stat = book.GetStatistics();
 
             Assert.Equal(60, stat.High);
@@ -129,7 +131,7 @@ namespace GradeBook.Tests
         {
             var book = new Book("");
 
-            book.AddLetterGrade('F');
+            book.AddGrade('F');
             var stat = book.GetStatistics();
 
             Assert.Equal(0, stat.High);
